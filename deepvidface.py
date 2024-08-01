@@ -2,6 +2,7 @@ import cv2
 from deepface import DeepFace 
 from PIL import Image
 import numpy as np
+from PotraitFace import PotraitFace
 import multiprocessing as mp 
 import time
 import os
@@ -16,7 +17,6 @@ def initialize(cap):
     st.write(f"fps of video {fps}")
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     st.write(f"Total number of frames: {total_frames}")
-    st.write(cap)
 
     frame_list=[]
     count=0
@@ -49,24 +49,18 @@ def get_potraits(frame):
     pf=PotraitFace(np.array(frame))  
     #potraitfaces_list=potraitfaces_list+pf.get_potraitfaces_list()
     #print("added the potraits to the list")
-    pf_list=pf.get_potraitfaces_list()
-    st.write(pf_list)
-    
-    return pf_list    
+    return pf.get_potraitfaces_list()    
 
 
-#if __name__ == '__main__':
-def process_video(upload_file):    
+if __name__ == '__main__':
     #potraitfaces_list=[]
 
     start_time=time.time()
-    #upload_file=st.file_uploader( "Choose a mp4 file", type=['mp4'],accept_multiple_files=False)
-    #st.write("please upload a vido in mp4 format")
+    upload_file=st.file_uploader( "Choose a mp4 file", type=['mp4'],accept_multiple_files=False)
+    st.write("please upload a vido in mp4 format")
     
 
     if upload_file is not None:
-    
-      
         st.write(f"file name : {upload_file.name}")
         st.write("file is mp4")
         # Save the uploaded file to a temporary file
@@ -79,16 +73,13 @@ def process_video(upload_file):
         print("##########################################################################################################################")
         print("extracting faces....")
         frame_list=initialize(cap)
-        #st.write(f"number of processors at work: {mp.cpu_count()}")
+        st.write(f"number of processors at work: {mp.cpu_count()}")
         
-        #with mp.Pool(int(mp.cpu_count())) as p:
-         #   results = p.map(get_potraits, frame_list)
+        with mp.Pool(int(mp.cpu_count())) as p:
+            results = p.map(get_potraits, frame_list)
             #print(results)
             #p.close()
-        #st.write(frame_list)
-        results=[get_potraits(frame) for frame in frame_list]
-        st.write(f"results from get potraits : ")
-        st.write(len(frame_list))
+        print(len(results))
 
         images_list=[]
         for sub_res in results:
@@ -98,8 +89,7 @@ def process_video(upload_file):
                 images_list.append(k)
                 
         print(images_list)
-        st.write(f"number of faces extracted :")
-        st.write(len(images_list))
+        st.write(f"number of faces extracted : {len(images_list)}")
         cap.release()
 
         zip_buffer = io.BytesIO()
@@ -122,84 +112,6 @@ def process_video(upload_file):
         end_time=time.time()
         st.write("total time taken in minutes", round((end_time-start_time)/60,2))
         st.write("done")
-        #st.stop()
-if __name__ == '__main__':
-    
-    class PotraitFace:
-        def __init__(self, img_array):
-            self.image_path=None
-            self.image_array=img_array
-            self.image=Image.fromarray(self.image_array)
-            self.dfs=None
+        st.stop()
 
-
-        def get_embeddings(self):
-            try:
-                self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='yolov8')
-                st.write(self.dfs)
-                return self.dfs
-            except:
-                self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='yolov8')
-                st.write(self.dfs)
-                return None
-        @staticmethod
-        def magnified_coordinates(x,y,w,h):
-            X=x-0.25*w if x-0.25*w>=0 else 0
-            Y=y-0.25*h if y-0.25*h>=0 else 0
-            W=w+0.5*w
-            H=h+0.5*h
-            
-            return(X,Y,W,H)
-        
-        def get_potraitface_coordinates(self):
-            #print("getting face coordinates")
-            crop_coordinates=[]
-            if self.dfs==None:
-                return crop_coordinates
-            for i in range(len(self.dfs)):
-                x1=self.dfs[i]['facial_area']['x']
-                y1=self.dfs[i]['facial_area']['y']
-                w=self.dfs[i]['facial_area']['w']
-                h=self.dfs[i]['facial_area']['h']
-
-                X1,Y1,W,H= self.magnified_coordinates(x1,y1,w,h)
-                X2=X1+W
-                Y2=Y1+H
-                crop_coordinates.append((X1,Y1,X2,Y2))
-            print("Done getting face coordinates")    
-            return crop_coordinates
-            
-        def get_potraitfaces(self,coordinates):
-            potraitfaces_list=[]
-
-            #print("getting faces from coordinates")
-            if coordinates==[]:
-                st.write("coordinates are empty")
-                return potraitfaces_list
-
-            for i in range(len(coordinates)):
-                st.write("coordinates exist")
-                potraitfaces_list.append(self.image.crop(coordinates[i]))
-
-            print(potraitfaces_list)
-            print("Done getting faces from coordinates")
-            return potraitfaces_list
-        
-        
-        def get_potraitfaces_list(self):
-            self.get_embeddings()
-            return self.get_potraitfaces(self.get_potraitface_coordinates())
-
-
-        def get_potraitfaces_dict(self):
-            self.get_embeddings()
-            return self.get_potraitfaces(self.get_potraitface_coordinates())
-        
-    
-    
-    upload_file = st.file_uploader("Choose a mp4 file", type=['mp4'], accept_multiple_files=False)
-    st.write("Please upload a video in mp4 format")
-
-    if upload_file is not None:
-        process_video(upload_file)
     
