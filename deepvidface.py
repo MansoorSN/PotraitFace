@@ -171,9 +171,11 @@ if __name__ == '__main__':
 
             #print("getting faces from coordinates")
             if coordinates==[]:
+                st.write("coordinates are empty")
                 return potraitfaces_list
 
             for i in range(len(coordinates)):
+                st.write("coordinates exist")
                 potraitfaces_list.append(self.image.crop(coordinates[i]))
 
             print(potraitfaces_list)
