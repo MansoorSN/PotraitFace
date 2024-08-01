@@ -136,10 +136,7 @@ if __name__ == '__main__':
         def get_embeddings(self):
             try:
                 self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='yolov8')
-                st.write(f"deep face represent : {self.dfs} ")
-                    
-                
-                
+                st.write(self.dfs)
                 return self.dfs
             except:
                 return None
