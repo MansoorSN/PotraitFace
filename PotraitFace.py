@@ -1,6 +1,7 @@
 from deepface import DeepFace 
 from PIL import Image
 import numpy as np
+import streamlit as st
 
 class PotraitFace:
     def __init__(self, img_array):
@@ -13,8 +14,11 @@ class PotraitFace:
     def get_embeddings(self):
         try:
             self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='yolov8')
+            st.write(self.dfs)
             return self.dfs
         except:
+            self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='yolov8')
+            st.write(self.dfs)
             return None
     @staticmethod
     def magnified_coordinates(x,y,w,h):
