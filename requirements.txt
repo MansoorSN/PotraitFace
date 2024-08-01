@@ -88,7 +88,7 @@ nbformat==5.10.4
 nest-asyncio==1.6.0
 networkx==3.3
 numpy==1.26.4
-opencv-python==4.10.0.82
+opencv-python
 opt-einsum==3.3.0
 optree==0.11.0
 packaging==24.1
