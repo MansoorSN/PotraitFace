@@ -46,7 +46,7 @@ class PotraitFace:
     def get_potraitfaces(self,coordinates):
         potraitfaces_list=[]
 
-        print("getting faces from coordinates")
+        #print("getting faces from coordinates")
         if coordinates==[]:
             return potraitfaces_list
 
