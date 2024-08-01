@@ -4,6 +4,6 @@ Pillow
 numpy<2
 streamlit
 tf-keras
-ultralytics
+ultralytics>=8.0.122
 torch 
 torchvision
