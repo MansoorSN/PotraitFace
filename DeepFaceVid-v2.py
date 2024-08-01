@@ -74,7 +74,7 @@ def process_video(upload_file):
         print("##########################################################################################################################")
         print("extracting faces....")
         frame_list=initialize(cap)
-        st.write(f"number of processors at work: {mp.cpu_count()}")
+        #st.write(f"number of processors at work: {mp.cpu_count()}")
         
         #with mp.Pool(int(mp.cpu_count())) as p:
          #   results = p.map(get_potraits, frame_list)
