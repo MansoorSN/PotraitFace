@@ -86,7 +86,7 @@ def process_video(upload_file):
             #p.close()
         #st.write(frame_list)
         results=[get_potraits(frame) for frame in frame_list]
-        st.write(f"reuslts from get potraits : ")
+        st.write(f"results from get potraits : ")
         st.write(len(frame_list))
 
         images_list=[]
