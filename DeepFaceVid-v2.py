@@ -52,12 +52,13 @@ def get_potraits(frame):
     return pf.get_potraitfaces_list()    
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
+def process_video(upload_file):    
     #potraitfaces_list=[]
 
     start_time=time.time()
-    upload_file=st.file_uploader( "Choose a mp4 file", type=['mp4'],accept_multiple_files=False)
-    st.write("please upload a vido in mp4 format")
+    #upload_file=st.file_uploader( "Choose a mp4 file", type=['mp4'],accept_multiple_files=False)
+    #st.write("please upload a vido in mp4 format")
     
 
     if upload_file is not None:
@@ -113,5 +114,10 @@ if __name__ == '__main__':
         st.write("total time taken in minutes", round((end_time-start_time)/60,2))
         st.write("done")
         st.stop()
+if __name__ == '__main__':
+    upload_file = st.file_uploader("Choose a mp4 file", type=['mp4'], accept_multiple_files=False)
+    st.write("Please upload a video in mp4 format")
 
+    if upload_file is not None:
+        process_video(upload_file)
     
