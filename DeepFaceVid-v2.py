@@ -50,7 +50,10 @@ def get_potraits(frame):
     pf=PotraitFace(np.array(frame))  
     #potraitfaces_list=potraitfaces_list+pf.get_potraitfaces_list()
     #print("added the potraits to the list")
-    return pf.get_potraitfaces_list()    
+    pf_list=pf.get_potraitfaces_list()
+    st.write(pf_list)
+    
+    return pf_list    
 
 
 #if __name__ == '__main__':
