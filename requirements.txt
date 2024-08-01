@@ -5,3 +5,5 @@ numpy<2
 streamlit
 tf-keras
 ultralytics
+torch 
+torchvision
