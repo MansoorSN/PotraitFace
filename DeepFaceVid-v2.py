@@ -113,7 +113,7 @@ def process_video(upload_file):
         end_time=time.time()
         st.write("total time taken in minutes", round((end_time-start_time)/60,2))
         st.write("done")
-        st.stop()
+        #st.stop()
 if __name__ == '__main__':
     upload_file = st.file_uploader("Choose a mp4 file", type=['mp4'], accept_multiple_files=False)
     st.write("Please upload a video in mp4 format")
