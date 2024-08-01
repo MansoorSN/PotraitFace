@@ -22,7 +22,7 @@ Keras-Preprocessing==1.1.2
 Markdown==3.3.4
 MarkupSafe==2.0.1
 numpy==1.21.4
-opencv-python==4.5.4.58
+opencv-python==4.5.5.64
 opt-einsum==3.3.0
 Pillow==8.4.0
 protobuf==3.19.1
