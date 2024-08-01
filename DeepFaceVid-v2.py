@@ -17,6 +17,7 @@ def initialize(cap):
     st.write(f"fps of video {fps}")
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     st.write(f"Total number of frames: {total_frames}")
+    st.write(cap)
 
     frame_list=[]
     count=0
