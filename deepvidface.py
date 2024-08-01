@@ -80,8 +80,9 @@ if __name__ == '__main__':
             #print(results)
             #p.close()
         results=[]
-        for frame in frame_list:
+        for i,frame in enumerate(frame_list):
             results.append(get_potraits(frame))
+            st.write(f"processed frame no. : {i}")
             
             
         print(len(results))
