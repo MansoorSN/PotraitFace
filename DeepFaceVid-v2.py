@@ -76,10 +76,12 @@ def process_video(upload_file):
         frame_list=initialize(cap)
         st.write(f"number of processors at work: {mp.cpu_count()}")
         
-        with mp.Pool(int(mp.cpu_count())) as p:
-            results = p.map(get_potraits, frame_list)
+        #with mp.Pool(int(mp.cpu_count())) as p:
+         #   results = p.map(get_potraits, frame_list)
             #print(results)
             #p.close()
+
+        results=[get_potraits(frame) for frame in frame_list]
         print(len(results))
 
         images_list=[]
