@@ -93,7 +93,8 @@ def process_video(upload_file):
                 images_list.append(k)
                 
         print(images_list)
-        st.write(f"number of faces extracted : {int(len(images_list))}")
+        st.write(f"number of faces extracted :")
+        st.write(len(images_list))
         cap.release()
 
         zip_buffer = io.BytesIO()
