@@ -81,7 +81,7 @@ def process_video(upload_file):
          #   results = p.map(get_potraits, frame_list)
             #print(results)
             #p.close()
-
+        st.write(frame_list)
         results=[get_potraits(frame) for frame in frame_list]
         print(len(results))
 
