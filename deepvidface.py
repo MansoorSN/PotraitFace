@@ -75,17 +75,15 @@ if __name__ == '__main__':
         frame_list=initialize(cap)
         st.write(f"number of processors at work: {mp.cpu_count()}")
         
-        #with mp.Pool(int(4)) as p:
+        #with mp.Pool(int(mp.cpu_count())) as p:
          #   results = p.map(get_potraits, frame_list)
             #print(results)
             #p.close()
-        results=[]
-        for i,frame in enumerate(frame_list[:20]):
-            results.append(get_potraits(frame))
-            st.write(f"processed frame no. : {i}")
             
-            
-        print(len(results))
+        st.image(frame_list[200])
+        results=get_potraits(frame_list[200])
+        st.write(len(results))
+        st.write(results)
 
         images_list=[]
         for sub_res in results:
