@@ -13,7 +13,7 @@ class PotraitFace:
 
     def get_embeddings(self):
         try:
-            self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='mtcnn', align=True)
+            self.dfs = DeepFace.represent(img_path = self.image_array,model_name = 'SFace',detector_backend='mediapipe', align=True)
             st.write(self.dfs)
             return self.dfs
         except:
