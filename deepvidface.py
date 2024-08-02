@@ -79,9 +79,9 @@ if __name__ == '__main__':
          #   results = p.map(get_potraits, frame_list)
             #print(results)
             #p.close()
-            
-        st.image(frame_list[200])
-        results=get_potraits(frame_list[200])
+        frame = cv2.cvtColor(frame_list[200], cv2.COLOR_BGR2RGB)    
+        st.image(frame)
+        results=get_potraits(frame)
         st.write(len(results))
         st.write(results)
 
